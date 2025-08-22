@@ -53,18 +53,42 @@ rel="stylesheet">
 </form>
 </div>
 
+
 <script>
 function validateForm() {
-let name = document.getElementById("name").value;
-let email = document.getElementById("email").value;
-let phone = document.getElementById("phone").value;
-if (name=="" || email=="" || phone=="") { alert("All fields required!"); return false; }
-if (!email.includes("@")) { alert("Invalid email!"); return false; }
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
 
-if (phone.length !== 10 || isNaN(phone)) { alert("Phone must be 10 digits!"); return false; }
-return true;
+    if (name == "" || email == "" || phone == "") { 
+        alert("All fields required!"); 
+        return false; 
+    }
+
+    if (!email.includes("@")) { 
+        alert("Invalid email!"); 
+        return false; 
+    }
+
+    if (phone.length !== 10 || isNaN(phone)) { 
+        alert("Phone must be 10 digits!"); 
+        return false; 
+    }
+
+    return true; // ✅ End validation correctly
 }
+
+// ✅ Live validation for name field
+document.getElementById("name").addEventListener("input", function() {
+    let name = this.value;
+    if (name.length < 3) {
+        this.style.borderColor = "red";
+    } else {
+        this.style.borderColor = "green";
+    }
+});
 </script>
+
 
 
 </body>

@@ -35,18 +35,19 @@ $result = $conn->query($sql);
         <thead class="table-dark">
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
+                 <th onclick="sortTable(1)">Name</th>
+                 <th onclick="sortTable(2)">Email</th>
                 <th>Phone</th>
                 <th>Created At</th>
                 <th>Actions</th>
             </tr>
+           
         </thead>
         <tbody>
         <?php
         if ($result && $result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                echo "<tr>
+             echo "<tr>
                         <td>{$row['id']}</td>
                         <td>{$row['name']}</td>
                         <td>{$row['email']}</td>
@@ -65,5 +66,29 @@ $result = $conn->query($sql);
         </tbody>
     </table>
 </div>
+<script>
+function sortTable(n) {
+let table, rows, switching, i, x, y, shouldSwitch;
+table = document.getElementById("entriesTable");
+switching = true;
+while (switching) {
+switching = false;
+rows = table.rows;
+for (i = 1; i < (rows.length - 1); i++) {
+shouldSwitch = false;
+x = rows[i].getElementsByTagName("TD")[n];
+y = rows[i + 1].getElementsByTagName("TD")[n];
+if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+shouldSwitch = true;
+break;
+}
+}
+if (shouldSwitch) {
+rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+switching = true;
+}
+}
+}
+</script>
 </body>
 </html>
